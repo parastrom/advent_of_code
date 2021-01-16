@@ -18,22 +18,12 @@ pub fn part1(input : &String) -> u32{
 }
 
 pub fn part2(input : &String) -> u32 {
-    //let array: Vec<&str> = input.split("\n").collect();
 
     let array: Vec<u32> = input
         .split('\n')
         .map(|s: &str| s.trim().parse::<u32>().unwrap())
         .collect();
     
-
-    /*for x in 0..array.len() {
-        let number = array[x];
-        let temp = number.to_string();
-        let length = temp.chars().count();
-        if 3 == length {
-            three_digit_nums.push(array[x]);
-        } 
-    }*/
     let three_digit_nums = array.iter()
     .filter(|x| x.to_string().len() == 3)
     .collect::<Vec<&u32>>();
