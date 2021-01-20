@@ -1,4 +1,4 @@
-pub fn part1(input : &String) -> u32 {
+pub fn part1(input : &str) -> u32 {
     let array: Vec<Vec<char>> = input
     .split("\r\n")
     .map(|s: &str| s.chars().collect())
@@ -7,34 +7,30 @@ pub fn part1(input : &String) -> u32 {
     let mut tree_counter = 0;
     let mut pos: (u32, u32) = (0,0);
     let max_pos: (u32, u32) = (array[1].len()as u32 - 1, array.len() as u32 - 1);
+    let iterator = (3,1);
 
     while pos.1 <= max_pos.1 {
-        //increment pos by move command
-        //
         match array.get(pos.1 as usize).unwrap().get(pos.0 as usize) {
             Some(character) =>  {
-                //println!("{}",pos.1);
                 if *character == '#' {
                     tree_counter += 1;
                 }
             }
             None => {
-                //let new_pos =  pos.0 - max_pos.0;
-                //pos.0 = new_pos;
                 println!("Second : {}",pos.0)
             }
         }
-        if pos.0 <= max_pos.0 - 3 {
-            pos.0 += 3;
+        if pos.0 <= max_pos.0 - iterator.0 {
+            pos.0 += iterator.0;
         } else  {
-            pos.0 = pos.0 - 28;
+            pos.0 -= max_pos.0 - iterator.0 + 1;
         }
-        pos.1 += 1; 
+        pos.1 += iterator.1; 
     }
-    return tree_counter;
+    tree_counter
 }
 
-pub fn part2(input : &String) ->  u32 {
+pub fn part2(input : &str) ->  u32 {
     let array: Vec<Vec<char>> = input
     .split("\r\n")
     .map(|s: &str| s.chars().collect())
@@ -61,7 +57,7 @@ pub fn part2(input : &String) ->  u32 {
             if pos.0 <= max_pos.0 - iterators[x].0 {
                 pos.0 += iterators[x].0;
             } else  {
-                pos.0 = pos.0 - (max_pos.0 - iterators[x].0 + 1);
+                pos.0 -= max_pos.0 - iterators[x].0 + 1;
             }
             pos.1 += iterators[x].1;
         }
@@ -74,5 +70,5 @@ pub fn part2(input : &String) ->  u32 {
     for x in values.iter() {
         product *= x;
     } 
-    return product;
+    product
 }

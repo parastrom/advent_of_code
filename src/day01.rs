@@ -1,23 +1,21 @@
 
-pub fn part1(input : &String) -> u32{
+pub fn part1(input : &str) -> u32{
     let array: Vec<u32> = input
         .split('\n')
         .map(|s: &str| s.trim().parse::<u32>().unwrap())
         .collect();
-    for x in 0..array.len() {
-        let first = array[x];
-        for y in (x+1)..array.len(){
-            let second = array[y];
+    for first in &array {
+        for second in array.iter().skip(array.iter().position(|&x| x == *first).unwrap() + 1) {
             let total = first + second;
             if total == 2020 {
-                return first * second;
+                return (first * second) as u32;
             }
         }
     }
     0
 }
 
-pub fn part2(input : &String) -> u32 {
+pub fn part2(input : &str) -> u32 {
 
     let array: Vec<u32> = input
         .split('\n')
@@ -34,15 +32,14 @@ pub fn part2(input : &String) -> u32 {
                 .size_hint()
                 .0;
 
-    for x in 0..array.len() {
+    for first in &array {
         for y in 0..length {
             for z in (y+1)..length {
-                let total = array[x] + three_digit_nums[y] + three_digit_nums[z];
+                let total = first + three_digit_nums[y] + three_digit_nums[z];
                 if total == 2020 {
-                    let num_1 = array[x];
                     let num_2 = three_digit_nums[y];
                     let num_3 = three_digit_nums[z];
-                    return num_1 * num_2 * num_3;
+                    return first * num_2 * num_3;
                 }
             }
         }

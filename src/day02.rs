@@ -1,8 +1,8 @@
-pub fn part1(input : &String) -> u32 {
-    let lines: Vec<&str> = input.split("\n").collect();
+pub fn part1(input : &str) -> u32 {
+    let lines: Vec<&str> = input.split('\n').collect();
     let mut valid_pwds = 0;
-    for x in 0..lines.len() {
-        let line:Vec<&str> = lines[x].split(|c| vec!['-', ':', ' '].contains(&c)).collect();
+    for item in &lines {
+        let line:Vec<&str> = item.split(|c| vec!['-', ':', ' '].contains(&c)).collect();
         let min = line[0].parse::<u32>().unwrap();
         let max = line[1].parse::<u32>().unwrap();
         let letter_count = line[4].matches(line[2]).count() as u32;
@@ -13,11 +13,11 @@ pub fn part1(input : &String) -> u32 {
     valid_pwds
 }
 
-pub fn part2(input: &String) -> u32 {
-    let lines: Vec<&str> = input.split("\n").collect();
+pub fn part2(input: &str) -> u32 {
+    let lines: Vec<&str> = input.split('\n').collect();
     let mut valid_pwds = 0;
-    for x in 0..lines.len() {
-        let line:Vec<&str> = lines[x].split(|c| vec!['-', ':', ' '].contains(&c)).collect();
+    for item in &lines {
+        let line:Vec<&str> = item.split(|c| vec!['-', ':', ' '].contains(&c)).collect();
         let pos_1 = line[0].parse::<usize>().unwrap();
         let pos_2 = line[1].parse::<usize>().unwrap();
         let first_pos_check =  {
